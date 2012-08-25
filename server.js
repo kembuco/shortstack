@@ -7,7 +7,7 @@ var app = express();
 app.configure(function(){
   var RedisStore = require('connect-redis')(express);
 
-  app.set('port', process.env.PORT || 19768);
+  app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());

@@ -1,14 +1,18 @@
 var Presenter = require('./utils/Presenter'),
     Authnz = require('./utils/Authnz'),
-    AuthRouter = require('./routers/AuthRouter');
+    AuthRouter = require('./routers/AuthRouter'),
+    config = require('./utils/config').initialize();
 
 $(function() {
   Presenter.initialize({mainContent: $('#content')});
+
+  console.log(config.get())
+  
   Authnz.initialize({
-    userId: window.id,
+    userId: config.get('id'),
     loginUrl: '/#/login',
-    authenticated: window.authenticated,
-    roles: window.roles
+    authenticated: config.get('authenticated'),
+    roles: config.get('roles')
   });
 
   AuthRouter = new AuthRouter();
