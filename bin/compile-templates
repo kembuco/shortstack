@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    path = require('path'),
+    concatenated = "JST={};",
+    dir = __dirname + '/../templates',
+    out = fs.createWriteStream(__dirname + '/../public/javascripts/templates.js');
+
+fs.readdir(dir, function(err, files) {
+    if (!files || files.length == 0) {
+        console.log("no files found");
+        return;
+    }
+
+    files.forEach(function(file) {
+        fs.readFile(path.join(dir, file), function(err, contents) {
+            if (!contents) return;
+            
+            contents = contents.toString()
+                               .replace(/\s*(\r\n|\n|\r)\s*/gm, ' ') //remove newlines
+                               .replace(/'/g, '\\\''); //escape single quotes
+
+            concatenated += "JST['" + path.basename(file, '.jst') + "']=_.template('" + contents + "');";
+
+            if(files.indexOf(file) == files.length - 1) {
+                out.write(concatenated);
+                out.end();
+            }
+        });
+    });
+});

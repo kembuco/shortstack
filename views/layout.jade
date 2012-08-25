@@ -1,0 +1,45 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/app.min.css')
+    link(rel='stylesheet', href='/stylesheets/jHtmlArea.css')
+
+    meta(name='id', content='#{id}', data-variable='true')
+    meta(name='authenticated', content='#{authenticated}', data-variable='true')
+    meta(name='roles', content='!#{roles}', data-variable='true')
+  body
+    .navbar.navbar-fixed-top
+        .navbar-inner
+            .container-fluid
+                a.brand(href='#/') #{title}
+                if (authenticated)
+                    ul.nav.pull-left
+                        li
+                            a.pull-right(href='#/')
+                                i(class='icon-home')
+                                span Home
+                    ul.nav.pull-right
+                        li.dropdown
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                i(class='icon-cog')
+                                span.username #{session.user.fn} #{session.user.ln}
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href='#/password/change')
+                                        i(class='icon-key')
+                                        span change password
+                                    a(href='#/logout') 
+                                        i(class='icon-signout')
+                                        span logout
+        
+    block content
+
+    block scripts
+        script(src='/javascripts/jquery.min.js')
+        script(src='/javascripts/bootstrap.min.js')
+        script(src='/javascripts/json2.js')
+        script(src='/javascripts/underscore.min.js')
+        script(src='/javascripts/backbone.js')
+        script(src='/javascripts/jHtmlArea.min.js')

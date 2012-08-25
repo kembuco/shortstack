@@ -1,0 +1,18 @@
+{
+  "url": "http://localhost:19768/",
+  "admin-email": "kembuco@gmail.com",
+  "system-email": "Application Name <noreply@application.com>",
+
+  "mongo": {
+    "host": "127.0.0.1",
+    "port": "27017",
+    "db": "application",
+    "reconnect": true,
+    "poolSize": 5
+  },
+
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  }
+}
